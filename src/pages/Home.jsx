@@ -1,11 +1,15 @@
 import React from 'react';
 import qs from 'qs';
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import {
+  selectFilter,
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
@@ -19,11 +23,9 @@ export const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
-  const { searchValue } = React.useContext(SearchContext);
-
+  const { items, status } = useSelector(selectPizzaData);
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
@@ -65,7 +67,7 @@ export const Home = () => {
       );
       isSearch.current = true;
     }
-  }, []);
+  }, [dispatch]);
 
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {

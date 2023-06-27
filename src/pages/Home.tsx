@@ -92,7 +92,7 @@ export const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [currentPage, categoryId, sort.sortProperty, searchValue]);
+  }, [currentPage, categoryId, sort.sortProperty, searchValue, navigate]);
 
   const pizzas = items.map((obj: any) => (
     <Link key={obj.id} to={`/pizza/${obj.id}`}>
@@ -104,7 +104,7 @@ export const Home: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={(i: number) => onChangeCategory(i)} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>

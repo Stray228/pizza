@@ -26,7 +26,7 @@ export const Search = () => {
   );
 
   const onChangeInput = React.useCallback(
-    (e: any) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       debounsedSearch(e.target.value);
       setValue(e.target.value);
     },

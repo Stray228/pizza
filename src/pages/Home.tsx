@@ -16,6 +16,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { useAppDispatch } from '../redux/store';
+import { log } from 'console';
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ export const Home: React.FC = () => {
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -91,7 +92,7 @@ export const Home: React.FC = () => {
   //   isMounted.current = true;
   // }, [currentPage, categoryId, sort.sortProperty, searchValue, navigate]);
 
-  const pizzas = items.map((obj: any) => (<PizzaBlock {...obj} />
+  const pizzas = items.map((obj: any) => (<PizzaBlock key={obj.id} {...obj} />
   ));
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
@@ -99,7 +100,7 @@ export const Home: React.FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

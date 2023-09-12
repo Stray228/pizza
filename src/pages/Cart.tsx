@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {CartItem, CartEmpty} from '../components';
+import { CartItem, CartEmpty } from '../components';
 
 import { selectCart } from '../redux/cart/selectors';
 import { clearItems } from '../redux/cart/slice';
@@ -106,7 +106,7 @@ const Cart: React.FC = () => {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link to="/" className="button button--outline button--add go-back-btn">
+            <Link to="/pizza" className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"

@@ -6,9 +6,9 @@ import MainLayout from './layouts/MainLayout';
 
 import './scss/app.scss';
 
-const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './Cart'));
-const FulPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */ './FullPizza'));
-const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ './NotFound'));
+const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pizza/Cart'));
+const FulPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */ './pizza/FullPizza'));
+const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ './pizza/NotFound'));
 
 function App() {
   return (
